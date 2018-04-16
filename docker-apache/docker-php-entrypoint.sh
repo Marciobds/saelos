@@ -9,8 +9,6 @@ cd /var/www/html
 
 composer install --no-dev
 
-composer install --no-dev
-
 npm install 
 
 npm run prod
