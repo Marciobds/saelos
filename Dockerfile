@@ -45,9 +45,10 @@ VOLUME /var/www/html
 
 WORKDIR /var/www/html
 
-COPY docker-apache/docker-php-entrypoint /usr/local/bin/
+COPY docker-apache/docker-php-entrypoint.sh /entrypoint.sh
 
 EXPOSE 80
 
-ENTRYPOINT ["docker-php-entrypoint"]
+ENTRYPOINT ["/entrypoint.sh"]
+
 CMD ["apache2-foreground"]
