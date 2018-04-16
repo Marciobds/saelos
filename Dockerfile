@@ -16,7 +16,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
       git \
       zip \
       mysql-client \
-      php-soap \
       unzip \
       g++ \
       libmagickwand-dev \
