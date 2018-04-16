@@ -15,11 +15,23 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
       libssl-dev \
       git \
       zip \
+      mysql-client \
+      php-soap
       unzip \
+      g++ \
+      libmagickwand-dev \
+      imagemagick \
+      libpng-dev \
+      zlib1g-dev \
+      libzip-dev \
+      libfreetype6-dev \
+      libssl-dev \
+      libmcrypt-dev \
       wget \
       curl \
       libmcrypt-dev \
     && rm -r /var/lib/apt/lists/* \
+    && docker-php-ext-install mbstring intl zip gd exif \
     && docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
     && docker-php-ext-install \
       intl \
@@ -33,6 +45,16 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
       opcache \
       && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
       && rm -rf /var/lib/apt/lists/*
+
+RUN docker-php-ext-configure gd \
+      --enable-gd-native-ttf \
+      --with-jpeg-dir=/usr/lib \
+      --with-freetype-dir=/usr/include/freetype2 && \
+    docker-php-ext-install gd
+
+RUN pecl install imagick -y
+
+RUN docker-php-ext-enable imagick
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
