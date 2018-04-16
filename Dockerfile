@@ -45,7 +45,7 @@ VOLUME /var/www/html
 
 WORKDIR /var/www/html
 
-COPY docker-apache/docker-php-entrypoint.sh /usr/local/bin/
+COPY docker-apache/docker-php-entrypoint /usr/local/bin/
 
 EXPOSE 80
 
