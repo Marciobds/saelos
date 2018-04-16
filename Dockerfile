@@ -4,6 +4,7 @@ LABEL maintainer="Luiz Eduardo <luiz@powertic.com>"
 
 # Install PHP extensions
 RUN apt-get update && apt-get install --no-install-recommends -y \
+      build-essential \
       libicu-dev \
       cron \
       libc-client-dev \
@@ -35,6 +36,10 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
+
+RUN curl -sL https://deb.nodesource.com/setup_9.x | bash -
+
+RUN apt-get install -y nodejs
 
 # Put apache config for Laravel
 COPY docker-apache/apache2-laravel.conf /etc/apache2/sites-available/laravel.conf

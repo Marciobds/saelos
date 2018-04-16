@@ -9,6 +9,12 @@ cd /var/www/html
 
 composer install --no-dev
 
+composer install --no-dev
+
+npm install 
+
+npm run prod
+
 chown -R www-data:www-data /var/www/html
 
 # first arg is `-f` or `--some-option`
