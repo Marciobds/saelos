@@ -5,7 +5,18 @@ LABEL maintainer="Luiz Eduardo <luiz@powertic.com>"
 # Install PHP extensions
 RUN apt-get update && apt-get install --no-install-recommends -y \
       libicu-dev \
+      cron \
+      libc-client-dev \
+      libicu-dev \
+      libkrb5-dev \
+      libmcrypt-dev \
       libpq-dev \
+      libssl-dev \
+      git \
+      zip \
+      unzip \
+      wget \
+      curl \
       libmcrypt-dev \
     && rm -r /var/lib/apt/lists/* \
     && docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
@@ -30,13 +41,13 @@ COPY docker-apache/apache2-laravel.conf /etc/apache2/sites-available/laravel.con
 
 RUN a2dissite 000-default.conf && a2ensite laravel.conf && a2enmod rewrite
 
+VOLUME /var/www/html
+
 WORKDIR /var/www/html
 
 COPY docker-apache/docker-php-entrypoint.sh /usr/local/bin/
 
 EXPOSE 80
 
-CMD ["apache2-foreground"]
-
 ENTRYPOINT ["docker-php-entrypoint"]
-
+CMD ["apache2-foreground"]
